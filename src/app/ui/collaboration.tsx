@@ -32,8 +32,8 @@ export default function CollaborationSection() {
 
   return (
     <div className="overflow-hidden w-full bg-white py-10">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4 ml-14">
-        Nous avons eu la chance de collaborer avec :
+      <h2 className="text-2xl font-medium text-gray-900 mb-4 ml-14">
+        PixelPulse bénéficie de la confiance de plus de 100 000 entreprises dans le monde entier.
       </h2>
       <div className="relative w-full flex items-center">
         <div
