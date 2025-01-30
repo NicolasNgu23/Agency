@@ -22,11 +22,11 @@ PixelPulse est une agence spécialisée dans le développement de sites web et d
 git clone https://github.com/NicolasNgu23/Agency.git
 cd Agency
 
-INSTALLER LES DÉPENDANCES:
+2️⃣ Installer les dépendances :
 
 npm install
 
-Configurer l’environnement:
+3️⃣ Configurer l’environnement :
 
 Créer un fichier .env.local avec :
 DATABASE_URL=postgresql://user:password@host:port/dbname
