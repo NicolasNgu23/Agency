@@ -55,10 +55,10 @@ export default function ProjectList({ filters }: { filters: { technologies: stri
             >
               {project.imageUrl ? (
                 <Image
-                  src={project.imageUrl}
+                  src={project.imageUrl ? `${project.imageUrl}`: 'netflix.webp' }
                   alt={project.name}
-                  width={400}
-                  height={250}
+                  width={350}
+                  height={200}
                   className="rounded-sm mt-2 w-[350px] h-[200px] border shadow-md transition-transform duration-300 ease-in-out hover:scale-105"
                 />
               ) : (
