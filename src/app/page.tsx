@@ -6,6 +6,8 @@ import ContactModal from './ui/ContactModal';
 import HeroSection from './ui/HeroSection';
 import CollaborationSection from './ui/collaboration';
 import ValuesSection from './ui/Values';
+import { ToastContainer } from 'react-toastify';
+
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +18,7 @@ const Page = () => {
   return (
     <>
       <NavBar openModal={openModal} />
+      <ToastContainer />
       <ContactModal isOpen={isModalOpen} onClose={closeModal} />
       <HeroSection/>
       <CollaborationSection/>

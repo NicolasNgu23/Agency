@@ -1,5 +1,10 @@
-import { useState } from "react";
+"use client";
+
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useActionState } from "react";
+import { startTransition } from "react";
+import { createContact } from "../action"; 
+import Swal from "sweetalert2"; 
 
 type FormData = {
   name: string;
@@ -7,42 +12,53 @@ type FormData = {
   message: string;
 };
 
+export type ContactFormState = { name: string; email: string; message: string; errors: { name?: string; email?: string; message?: string; }; };
+
 const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
+
+  const [state, formAction, isPending] = useActionState(
+    createContact, 
+    { name: "", email: "", message: "", errors: {} }
+  );
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    setIsSubmitting(true);
-    console.log("Envoi des données :", data); // 🔍 Vérifier les données envoyées
-  
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-  
-      console.log("Réponse serveur :", response); // 🔍 Voir ce que le serveur renvoie
-  
-      const result = await response.json(); // Lire la réponse JSON
-  
-      if (response.ok) {
-        setSuccessMessage("Votre message a été envoyé avec succès !");
-      } else {
-        setSuccessMessage(result.error || "Une erreur s'est produite, veuillez réessayer.");
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append("name", data.name.trim());
+      formData.append("email", data.email.trim());
+      formData.append("message", data.message.trim());
+
+      try {
+
+        await formAction(formData);
+
+        onClose();
+
+        if (!state.errors.name && !state.errors.email && !state.errors.message) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Message envoyé',
+            text: 'Votre message a été envoyé avec succès !',
+            confirmButtonText: 'OK',
+          });
+        }
+      } catch (error) {
+        if(error){
+          console.log(error)
+        }
+        onClose();
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Une erreur est survenue lors de l\'envoi du message.',
+          confirmButtonText: 'OK',
+        });
       }
-    } catch (error) {
-      console.error("Erreur de connexion:", error);
-      setSuccessMessage("Erreur de connexion, veuillez réessayer.");
-    }
-  
-    setIsSubmitting(false);
-    onClose();
+    });
   };
-  
+
   if (!isOpen) return null;
 
   return (
@@ -50,6 +66,7 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
       <div className="bg-white p-8 rounded-lg w-96">
         <h2 className="text-xl font-semibold mb-4">Formulaire de Contact</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Nom
@@ -95,24 +112,27 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           </div>
 
           <div className="flex justify-between items-center">
-            <button
-              type="button"
-              onClick={onClose}
+            <button 
+              type="button" 
+              onClick={onClose} 
               className="py-2 px-4 bg-gray-500 text-white rounded-md"
             >
               Fermer
             </button>
             <button
               type="submit"
-              disabled={isSubmitting}
-              className={`py-2 px-4 bg-blue-500 text-white rounded-md ${isSubmitting ? 'opacity-50' : ''}`}
+              disabled={isPending}
+              className={`py-2 px-4 bg-blue-500 text-white rounded-md ${isPending ? 'opacity-50' : ''}`}
             >
-              {isSubmitting ? "Envoi..." : "Envoyer"}
+              {isPending ? "Envoi..." : "Envoyer"}
             </button>
           </div>
         </form>
 
-        {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
+        {/* Ne pas afficher d'erreur non utilisée */}
+        {state.errors.name && <p className="text-red-500 mt-4">{state.errors.name}</p>}
+        {state.errors.email && <p className="text-red-500 mt-4">{state.errors.email}</p>}
+        {state.errors.message && <p className="text-red-500 mt-4">{state.errors.message}</p>}
       </div>
     </div>
   );
