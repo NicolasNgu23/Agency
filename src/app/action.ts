@@ -29,7 +29,6 @@ export async function getProjectData() {
 
 export async function getProjectById(id: number): Promise<Project | { error: string }> {
   try {
-    console.log("ID reçu pour récupération :", id);
 
     const project = await prisma.project.findUnique({
       where: { id: Number(id) },
@@ -45,7 +44,6 @@ export async function getProjectById(id: number): Promise<Project | { error: str
       return { error: "Projet non trouvé" };
     }
 
-    console.log("Projet trouvé :", project);
     return project;
   } catch (error) {
     console.error("Erreur lors de la récupération du projet :", error);

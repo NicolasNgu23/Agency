@@ -32,7 +32,7 @@ export default function ProjectsPage() {
         <div className="flex w-1/2 p-8">
           <p className="text-lg">
             Que vous ayez besoin d’un portfolio web, d’une boutique en ligne ou d’un blog,
-            commencez par les templates de site internet personnalisables et responsive de [Faut qu'on trouve un nom].
+            commencez par les templates de site internet personnalisables et responsive de [Faut qu on trouve un nom].
           </p>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { IoCallOutline } from "react-icons/io5";
 import { getProjectById } from "@/app/action";
 import Link from "next/link";
 
+
 type Technology = {
   id: number;
   name: string;
@@ -21,12 +22,12 @@ type ProjectTechnology = {
 
 type Project = {
   id: number;
-  createdAt: string;
+  createdAt: Date;
   name: string;
   url: string;
   description: string;
-  imageUrl: string;
-  technologies: ProjectTechnology[];
+  imageUrl: string | null;
+  technologies?: ProjectTechnology[];
 };
 
 
@@ -34,8 +35,8 @@ export default function ProjectPage() {
   const params = useParams();
   const router = useRouter();
   const projectId = Number(params.id);
-  const [project, setProject] = useState<Project | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [project, setProject] = useState<Project>();
+  const [error, setError] = useState<string>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -105,14 +106,20 @@ export default function ProjectPage() {
             Technologies utilisées pour le projet :
           </p>
           <div className="grid grid-cols-2 gap-4">
-            {project.technologies.map((tech, index) => (
-              <div
-                key={index}
-                className="bg-gray-100 text-gray-800 text-center py-2 rounded-lg shadow-sm"
-              >
-                {tech.technology.name}
-              </div>
-            ))}
+          {project?.technologies?.length ? (
+            <div className="grid grid-cols-2 gap-4">
+              {project.technologies.map((tech, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-100 text-gray-800 text-center py-2 rounded-lg shadow-sm"
+                >
+                  {tech.technology.name}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500">Aucune technologie associée</p>
+          )}
           </div>
         </div>
 

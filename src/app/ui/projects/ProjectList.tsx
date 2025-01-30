@@ -58,7 +58,7 @@ export default function ProjectList({ filters }: { filters: { technologies: stri
                   alt={project.name}
                   width={400}
                   height={250}
-                  className="rounded-sm mt-2 w-[350px] h-[200px] border shadow-md"
+                  className="rounded-sm mt-2 w-[350px] h-[200px] border shadow-md transition-transform duration-300 ease-in-out hover:scale-105"
                 />
               ) : (
                 <p className="text-gray-500 mt-2">Aucune image disponible</p>
