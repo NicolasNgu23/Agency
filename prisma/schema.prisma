@@ -11,17 +11,27 @@ datasource db {
 }
 
 model Project {
-  id          String      @id @default(uuid())
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   name        String
   description String
   imageUrl    String?
-  status      String      @default("Terminé")
+  status      String  @default("Terminé")
   startDate   DateTime?
   endDate     DateTime?
   category    String
-  technologies String[]
+  technologies Json?   // Utiliser JSON pour stocker les technologies
   link        String?
-  slug        String      @unique
+  slug        String  @unique
 }
+
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
