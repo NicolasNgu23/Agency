@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Seeding database...");
 
-  // 1️⃣ Liste des technologies uniques
   const technologyNames = [
     "React", "Next.js", "Tailwind CSS", "Node.js", "MongoDB",
     "Vue.js", "Firebase", "Vuetify", "Express.js", "PostgreSQL",
@@ -14,7 +13,6 @@ async function main() {
     "GraphQL", "Chakra UI"
   ];
 
-  // Insérer les technologies si elles n'existent pas
   await Promise.all(
     technologyNames.map(async (tech) => {
       await prisma.technology.upsert({
@@ -27,7 +25,6 @@ async function main() {
 
   console.log("✅ Technologies insérées avec succès");
 
-  // 2️⃣ Liste des projets et leurs technologies associées
   const projects = [
     {
       name: "Lauto",
@@ -73,7 +70,6 @@ async function main() {
     },
   ];
 
-  // 3️⃣ Insérer les projets avec leurs technologies associées
   for (const project of projects) {
     const createdProject = await prisma.project.create({
       data: {
@@ -95,7 +91,6 @@ async function main() {
   console.log("✅ Seeding terminé avec succès !");
 }
 
-// Exécuter le seeding
 main()
   .catch((error) => {
     console.error("❌ Erreur lors du seeding :", error);

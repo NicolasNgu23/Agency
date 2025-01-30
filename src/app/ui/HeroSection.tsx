@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function HeroSection() {
   return (
-    <div className="flex flex-row items-center text-left pl-16 pr-12 py-12 bg-gray-100 rounded-lg h-screen">
+    <div className="flex flex-row items-center text-left pl-16 pr-12 py-12 bg-gray-100 rounded-lg h-[90vh]">
       {/* Partie texte */}
       <div className="flex-1">
         <h1 className="text-[54px] w-[70%] font-bold text-gray-900 mb-4">
@@ -32,9 +32,9 @@ export default function HeroSection() {
           <Image
             src="/spotify2.webp"
             alt="Spotify"
-            width={500} 
-            height={300} 
-            layout="responsive" 
+            width={500}
+            height={300}
+            layout="responsive"
             className="rounded-lg shadow-md"
           />
         </div>

@@ -16,7 +16,6 @@ const Page = () => {
   return (
     <>
       <NavBar openModal={openModal} />
-      {/* Passer les props isOpen et onClose au modal */}
       <ContactModal isOpen={isModalOpen} onClose={closeModal} />
       <HeroSection/>
       <CollaborationSection/>
