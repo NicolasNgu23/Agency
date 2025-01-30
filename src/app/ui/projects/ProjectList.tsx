@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getFilteredProjects } from "@/app/action";
 
@@ -28,18 +28,19 @@ export default function ProjectList({ filters }: { filters: { technologies: stri
   const [projects, setProjects] = useState<Project[]>([]);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchFilteredProjects = async () => {
-      const result = await getFilteredProjects(filters.technologies, filters.projects);
-      setProjects(result);
-    };
-
-    fetchFilteredProjects();
+  const fetchFilteredProjects = useCallback(async () => {
+    const result = await getFilteredProjects(filters.technologies, filters.projects);
+    setProjects(result);
   }, [filters]);
+
+  useEffect(() => {
+    fetchFilteredProjects();
+  }, [fetchFilteredProjects]);
 
   const handleNavigate = (projectId: number) => {
     router.push(`/projects/${projectId}`);
   };
+
 
   return (
     <div className="w-5/6 p-8">
