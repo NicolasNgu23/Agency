@@ -9,7 +9,6 @@ export default function Filter({ setFilters }: { setFilters: (filters: { technol
     projectNames: [],
   });
 
-
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
 
@@ -38,41 +37,39 @@ export default function Filter({ setFilters }: { setFilters: (filters: { technol
     );
   };
 
-
   return (
-    <div className="w-1/6 px-8 my-8 border-r">
+    <div className="hidden md:block w-1/6 px-8 my-8 border-r"> {/* 👈 Cacher en petit écran */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-2">Technologies</h3>
         <div className="flex flex-col space-y-2">
-        {data.technologies.map((tech) => (
-          <label key={tech.id} className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              className="w-4 h-4"
-              onChange={() => handleTechnologyChange(tech)}
-              checked={selectedTechnologies.includes(tech.name)}
-            />
-            <p className="opacity-40 text-base font-thin">{tech.name}</p>
-          </label>
-        ))}
+          {data.technologies.map((tech) => (
+            <label key={tech.id} className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                className="w-4 h-4"
+                onChange={() => handleTechnologyChange(tech)}
+                checked={selectedTechnologies.includes(tech.name)}
+              />
+              <p className="opacity-40 text-base font-thin">{tech.name}</p>
+            </label>
+          ))}
         </div>
       </div>
       <div className="border-b my-2"></div>
       <div>
         <h3 className="text-lg font-semibold mb-2">Noms des projets</h3>
         <div className="flex flex-col space-y-2">
-        {data.projectNames.map((name) => (
-          <label key={name.id} className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              className="w-4 h-4"
-              onChange={() => handleProjectChange(name)}
-              checked={selectedProjects.includes(name.name)}
-            />
-            <p className="opacity-40 text-base font-thin">{name.name}</p>
-          </label>
-        ))}
-
+          {data.projectNames.map((name) => (
+            <label key={name.id} className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                className="w-4 h-4"
+                onChange={() => handleProjectChange(name)}
+                checked={selectedProjects.includes(name.name)}
+              />
+              <p className="opacity-40 text-base font-thin">{name.name}</p>
+            </label>
+          ))}
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ export default function ProjectsPage() {
     <div className="w-full flex flex-col">
       <div className="flex">
         <div className="flex w-1/2 p-8">
-          <p className="text-[48px] w-[70%] leading-tight">
+          <p className="md:text-[48px] text-3xl md:w-[70%] leading-tight">
             Personnalisez facilement le template de votre choix.
           </p>
         </div>

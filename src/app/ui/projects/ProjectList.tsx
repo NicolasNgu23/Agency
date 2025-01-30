@@ -46,7 +46,7 @@ export default function ProjectList({ filters }: { filters: { technologies: stri
     <div className="w-5/6 p-8">
       <p className="text-2xl font-medium mb-4">Projets : Développé par nos soins ({projects.length})</p>
       {projects.length > 0 ? (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="md:grid md:grid-cols-3 gap-4">
           {projects.map((project) => (
             <div
               key={project.id}
