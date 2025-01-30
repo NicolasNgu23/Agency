@@ -11,17 +11,27 @@ datasource db {
 }
 
 model Project {
-  id          String      @id @default(uuid())
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  name        String
-  description String
-  imageUrl    String?
-  status      String      @default("Terminé")
-  startDate   DateTime?
-  endDate     DateTime?
-  category    String
-  technologies String[]
-  link        String?
-  slug        String      @unique
+  id            Int                 @id @default(autoincrement())
+  createdAt     DateTime            @default(now())
+  name          String
+  url           String
+  description   String
+  imageUrl      String?
+  technologies  ProjectTechnology[]
+}
+
+model Technology {
+  id       Int                 @id @default(autoincrement())
+  name     String              @unique
+  projects ProjectTechnology[]
+}
+
+model ProjectTechnology {
+  projectId    Int
+  technologyId Int
+
+  project      Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, technologyId])
 }
