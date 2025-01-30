@@ -11,6 +11,7 @@ datasource db {
 }
 
 model Project {
+<<<<<<< HEAD
   id            Int                 @id @default(autoincrement())
   createdAt     DateTime            @default(now())
   name          String
@@ -34,4 +35,29 @@ model ProjectTechnology {
   technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
 
   @@id([projectId, technologyId])
+=======
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  description String
+  imageUrl    String?
+  status      String  @default("Terminé")
+  startDate   DateTime?
+  endDate     DateTime?
+  category    String
+  technologies Json?   // Utiliser JSON pour stocker les technologies
+  link        String?
+  slug        String  @unique
+>>>>>>> main
 }
+
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
