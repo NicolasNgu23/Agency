@@ -35,13 +35,13 @@ export default function ValuesSection() {
       name: 'Nicolas Nguyen',
       title: 'Directeur créatif',
       description: 'Passionné des nouvelles tendances, il donne vie aux concepts les plus audacieux.',
-      image: '/anthony.webp'
+      image: '/asiatdev.webp'
     },
     {
       name: 'Mika Ramanantsoa',
       title: 'Développeur web',
       description: 'Expert en codage et en solutions techniques, il transforme les idées en réalité.',
-      image: '/simu.webp'
+      image: '/mika.webp'
     }
   ];
 
