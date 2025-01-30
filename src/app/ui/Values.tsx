@@ -4,7 +4,7 @@ export default function ValuesSection() {
   const values = [
     {
       title: 'Créativité',
-      description: 'Toujours repousser les limites de l'
+      description: 'Toujours repousser ses propres limites.'
     },
     {
       title: 'Collaboration',

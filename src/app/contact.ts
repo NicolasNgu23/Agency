@@ -23,8 +23,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
       });
 
+      console.log("Message enregistré:", newMessage); // Ajout d'un log pour debug
+
       return res.status(200).json({ success: "Message envoyé avec succès !" });
     } catch (error) {
+      console.error("Erreur Prisma:", error); // Log pour voir l'erreur exacte
       return res.status(500).json({ error: "Erreur lors de l'envoi du message." });
     }
   } else {
