@@ -14,6 +14,7 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsSubmitting(true);
+    console.log("Envoi des données :", data); // 🔍 Vérifier les données envoyées
   
     try {
       const response = await fetch('/api/contact', {
@@ -21,17 +22,23 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data), // On envoie les données saisies dans le formulaire
+        body: JSON.stringify(data),
       });
+  
+      console.log("Réponse serveur :", response); // 🔍 Voir ce que le serveur renvoie
+  
+      const result = await response.json(); // Lire la réponse JSON
   
       if (response.ok) {
         setSuccessMessage("Votre message a été envoyé avec succès !");
       } else {
-        setSuccessMessage("Une erreur s'est produite, veuillez réessayer.");
+        setSuccessMessage(result.error || "Une erreur s'est produite, veuillez réessayer.");
       }
     } catch (error) {
+      console.error("Erreur de connexion:", error);
       setSuccessMessage("Erreur de connexion, veuillez réessayer.");
     }
+  
     setIsSubmitting(false);
     onClose();
   };
