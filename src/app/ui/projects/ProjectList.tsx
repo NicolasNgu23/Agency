@@ -35,7 +35,7 @@ export default function ProjectList({ filters }: { filters: { technologies: stri
 
   useEffect(() => {
     fetchFilteredProjects();
-  }, [fetchFilteredProjects]);
+  }, [filters, fetchFilteredProjects]);
 
   const handleNavigate = (projectId: number) => {
     router.push(`/projects/${projectId}`);

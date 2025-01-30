@@ -9,7 +9,7 @@ export default function HeroSection() {
           Donnez vie à vos projets Web & Mobile.
         </h1>
         <p className="text-lg md:text-xl text-gray-700 mb-6 max-w-lg">
-          Pixelpulse vous donne l’inspiration à travers de nombreux projets innovants.
+          Webya vous donne l’inspiration à travers de nombreux projets innovants.
         </p>
         <Link
           href="/projects"

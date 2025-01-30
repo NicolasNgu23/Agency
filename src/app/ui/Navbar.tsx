@@ -5,7 +5,7 @@ const NavBar = ({ openModal }: { openModal: () => void }) => {
     <nav className="flex justify-between items-center h-[10vh] px-8 text-white w-full">
       <div className="text-2xl font-bold">
         <Link href="/" className="text-black hover:text-blue-400 transition-colors">
-          PixelPulse
+          Webya
         </Link>
       </div>
       <div className="flex gap-6 text-uppercase justify-center w-full">
